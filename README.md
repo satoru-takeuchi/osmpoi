@@ -13,6 +13,6 @@ Usage
 -----
 
 1. Register your application to <http://api06.dev.openstreetmap.org>
-2. Edit config.rb as you need. For more detail, please refere to comments in this file.
+2. Edit config.rb.sample as you need and save it as config.rb. For more detail, please refere to comments in this file.
 3. Configure your web server: make *.cgi runnable as CGI script; prohibit to access without *.cgi, *.js, and *.css.
 4. Put this source tree into anywhere can be accessed from your web server.

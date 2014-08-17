@@ -22,8 +22,12 @@ lng = cgi['lng']
 c = Consumer.new
 c.set_access_token(session['access_token'], session['access_token_secret'])
 cs = c.create_changeset
- cs.create_node(lat, lng,
-                {"name" => name,
-                  "amenity" => kind})
 
-osmpoi_render(cgi, "after_submit.erb")
+status = "failed"
+if cs.create_node(lat, lng,
+                  {"name" => name,
+                    "amenity" => kind})
+  status = "succeeded"
+end
+ 
+osmpoi_render(cgi, "after_submit.erb", binding)

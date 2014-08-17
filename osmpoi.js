@@ -2,6 +2,8 @@ var map;
 var origin = [35.103, 138.8578];
 var zoom = 16;
 var popup;
+//var api_url = "http://api06.dev.openstreetmap.org/"
+var api_url = "http://api.openstreetmap.org/"
 
 function on_map_click(e) {
     select = "種類: <select size='5' name='kind'>" +
@@ -41,6 +43,7 @@ function on_location_found (e) {
 	.openPopup();
     L.circle(e.latlng, radius)
 	.addTo(map);
+    show_nodes();
 }
 
 function on_location_error(e) {
@@ -60,8 +63,40 @@ function show_map() {
 <a href='http://creativecommons.org/licenses/by-sa/2.0/'>CC-BY-SA</a>"
     }).addTo(map);
     popup = L.popup();
+    nodes = new Array();
 }
 
 function set_current_pos() {
     map.locate({setView: true, maxZoom: 16, enableHighAccuracy: true});
+}
+
+function show_nodes() {
+    var b = map.getBounds();
+
+    var req = new XMLHttpRequest();
+    req.open("GET",
+	     api_url + "/api/0.6/map?bbox=" +
+	     b.getWest() + "," + b.getSouth() + "," +
+	     b.getEast() + "," + b.getNorth(), false);
+    req.send(null);
+
+    $($.parseXML(req.responseText)).find("osm").find("node").each(function(){
+	var s = "";
+	show = false;
+	var lat = $(this).attr("lat");
+	var lon = $(this).attr("lon");
+	$(this).find("tag").each(function(){
+	    var k = $(this).attr("k");
+	    var v =  $(this).attr("v");
+	    if (k == "name" && v.length > 0) {
+		show = true;
+	    }
+	    s += k + ": " + v + "<br/>";
+	});
+	if (!show)
+	    return;
+	var m = L.marker([Number(lat), Number(lon)]);
+	m.bindPopup(s);
+	m.addTo(map);
+    });
 }

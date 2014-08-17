@@ -6,11 +6,13 @@
 <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
 <link rel="stylesheet" href="./osmpoi.css" />
 <script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="./osmpoi.js"></script>
 <title>Sat OSM</title>
 </head>
 <body onload="show_map()">
 <input type="button" value="現在地に移動" onclick="set_current_pos()" />
+<input type="button" value="既存ノードを表示" onclick="show_nodes()" />
 <hr/>
 <div id="map"></div>
 <hr/>

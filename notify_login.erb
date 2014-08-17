@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>Sat OSM</title>
+</head>
+<body>
+<p>本ソフトウェアはOpen Street Map(OSM)のPOIエディタです。</p>
+<p>現在本ソフトウェアはテスト段階にあります。使用にあたっては、以下の点にご注意ください。</p>
+<ul>
+<li>編集対象の地図は<a href="http://www.openstreetmap.org/">本家OSMの地図</a>ではなく、
+<a href="http://api06.dev.openstreetmap.org/">OSMのソフトウェア試験用サイト上の地図</a>です。</li>
+<li>あらかじめ、試験用サイト上においてアカウント(本家OSMのアカウントは使えない)を作成しておく必要があります。</li>
+<li>通信経路は暗号化されないため、<strong>実験専用のアカウントの作成を強く推奨します。</strong></li>
+<li>初回使用時に、本ソフトウェアにあなたのアカウントの権限で地図を編集させるための承認手続き(OAuth1.0a形式)が必要です。</li>
+<li>本ソフトウェアは無保証です。</li>
+</ul>
+<input type='button' value='承認手続きをする' onClick='window.location.href="<%= LOGIN_URL %>"'/>
+<hr/>
+Author: Satoru Takeuchi &lt; satoru.takeuchi@gmail.com &gt;
+</html></body>

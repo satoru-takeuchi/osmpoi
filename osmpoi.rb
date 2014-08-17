@@ -93,10 +93,10 @@ def osmpoi_create_session(cgi)
   CGI::Session.new(cgi, {"new_session" => true })
 end
 
-def osmpoi_render(cgi, file)
+def osmpoi_render(cgi, file, b=TOPLEVEL_BINDING)
   puts cgi.header
   erb = ERB.new(File.read(file))
-  erb.run(binding)
+  erb.run(b)
 end
 
 def osmpoi_redirect(cgi, url)

@@ -7,7 +7,7 @@ load "osmpoi.rb"
 cgi = CGI.new
 
 if session = osmpoi_get_session(cgi)
-  osmpoi_redirect(EDIT_URL)
+  osmpoi_redirect(cgi, EDIT_URL)
   exit 0
 else
   session = osmpoi_create_session(cgi)

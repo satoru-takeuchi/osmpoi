@@ -6,6 +6,8 @@ var popup;
 var api_url = "http://api06.dev.openstreetmap.org/"
 //var api_url = "http://api.openstreetmap.org/"
 
+var markers = new Array;
+
 function on_map_click(e) {
     select = "種類: <select size='5' name='kind'>" +
 	"<option value='restaurant'>レストラン</option>" +
@@ -72,6 +74,10 @@ function set_current_pos() {
 }
 
 function show_nodes() {
+    markers.forEach(function(e) {
+	map.removeLayer(e);
+    })
+
     var b = map.getBounds();
 
     var req = new XMLHttpRequest();
@@ -97,6 +103,7 @@ function show_nodes() {
 	if (!show)
 	    return;
 	var m = L.marker([Number(lat), Number(lon)]);
+	markers.push(m);
 	m.bindPopup(s);
 	m.addTo(map);
     });

@@ -2,8 +2,9 @@ var map;
 var origin = [35.103, 138.8578];
 var zoom = 16;
 var popup;
-//var api_url = "http://api06.dev.openstreetmap.org/"
-var api_url = "http://api.openstreetmap.org/"
+
+var api_url = "http://api06.dev.openstreetmap.org/"
+//var api_url = "http://api.openstreetmap.org/"
 
 function on_map_click(e) {
     select = "種類: <select size='5' name='kind'>" +

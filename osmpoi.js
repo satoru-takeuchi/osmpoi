@@ -7,6 +7,8 @@ var api_url = "http://api06.dev.openstreetmap.org/"
 //var api_url = "http://api.openstreetmap.org/"
 
 var markers = new Array;
+var current_marker = null;
+var current_circle = null;
 
 function on_map_click(e) {
     select = "種類: <select size='5' name='kind'>" +
@@ -41,11 +43,15 @@ function on_map_click(e) {
 
 function on_location_found (e) {
     var radius = e.accuracy / 2;
-    L.marker(e.latlng).addTo(map)
-	.bindPopup("あなたの現在地はここから " + radius + "メートル以内です")
+    if (current_marker)
+	map.removeLayer(current_marker);
+    current_marker = L.marker(e.latlng).addTo(map);
+    current_marker.bindPopup("あなたの現在地はここから " + radius + "メートル以内です")
 	.openPopup();
-    L.circle(e.latlng, radius)
-	.addTo(map);
+    if (current_circle)
+	map.removeLayer(current_circle);
+    current_circle = L.circle(e.latlng, radius);
+    current_circle.addTo(map);
     show_nodes();
 }
 

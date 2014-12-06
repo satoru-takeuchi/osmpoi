@@ -10,35 +10,56 @@ var markers = new Array;
 var current_marker = null;
 var current_circle = null;
 
-function on_map_click(e) {
-    select = "種類: <select size='5' name='kind'>" +
-	"<option value='restaurant'>レストラン</option>" +
-	"<option value='fast_food'>ファーストフード店</option>" +
-	"<option value='cafe'>喫茶店</option>" +
-	"<option value='school'>学校</option>" +
-	"<option value='library'>図書館</option>" +
-	"<option value='bank'>銀行</option>" +
-	"<option value='parking'>駐車場</option>" +
-	"<option value='hospital'>病院</option>" +
-	"<option value='pharmacy'>薬局</option>" +
-	"<option value='cinema'>映画館</option>" +
-	"<option value='townhall'>市役所、町役場</option>" +
-	"<option value='fire_station'>消防署</option>" +
-	"<option value='police'>警察署</option>" +
-	"<option value='post_office'>郵便局</option>" +
-	"</select><br/>"
+var category_selector_text = "<select id='category_selector' name='category' onchange='on_change_category()'>" +
+    "<option value='leisure' selected>娯楽施設</option>" +
+    "<option value='amenity'>生活</option>" +
+    "</select></br>"
 
+var pois = { "leisure":
+	     "<select id='kind' name='kind'>" +
+	     "<option value='stadium'>スタジアム</option>" +
+	     "<option value='pitch'>運動場</option>" +
+	     "<option value='park'>公園</option>" +
+	     "<option value='garden'>庭園・植物園</option>" +
+	     "</select><br/>"
+	     ,
+	     "amenity" : 
+	     "<select id='kind' name='kind'>" +
+	     "<option value='restaurant'>レストラン</option>" +
+	     "<option value='fast_food'>ファストフード店</option>" +
+	     "<option value='cafe'>喫茶店</option>" +
+	     "<option value='school'>学校</option>" +
+	     "<option value='library'>図書館</option>" +
+	     "<option value='bank'>銀行</option>" +
+	     "<option value='parking'>駐車場</option>" +
+	     "<option value='hospital'>病院</option>" +
+	     "<option value='pharmacy'>薬局</option>" +
+	     "<option value='cinema'>映画館</option>" +
+	     "<option value='townhall'>市役所、町役場</option>" +
+	     "<option value='fire_station'>消防署</option>" +
+	     "<option value='police'>警察署</option>" +
+	     "<option value='post_office'>郵便局</option>" +
+	     "</select><br/>"
+	   };
+
+function on_change_category() {
+    $("#kind_selector_pos").html(pois[$("#category_selector").val()] + "<br/>");
+}
+
+function on_map_click(e) {
     s = "<form action='submit.cgi' method='post'>" +
 	"名前: <input type='text' name='name' /><br/>" +
-	select +
+	"分類: " + category_selector_text +
+	"種類: " + "<div id='kind_selector_pos'></div>" +
 	"<input type='hidden' name='lat' value='" + e.latlng.lat + "' />" +
 	"<input type='hidden' name='lng' value='" + e.latlng.lng + "' />" +
 	"<input type='submit' value='追加' />" +
-	"</form>"
-	
+	"</form>";
+
     popup.setLatLng(e.latlng)
 	.setContent(s)
 	.openOn(map);
+    on_change_category();
 }
 
 function on_location_found (e) {

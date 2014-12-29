@@ -6,7 +6,6 @@ var popup;
 var api_url = "http://api06.dev.openstreetmap.org/"
 //var api_url = "http://api.openstreetmap.org/"
 
-var markers = new Array;
 var current_marker = null;
 var current_circle = null;
 
@@ -43,7 +42,7 @@ var poi_kinds = { "leisure":
 	     }
 	   };
 
-var pois;
+var pois = {};
 
 function show_category_selector() {
     s = "";
@@ -124,9 +123,9 @@ function set_current_pos() {
 }
 
 function show_pois() {
-    markers.forEach(function(e) {
-	map.removeLayer(e);
-    });
+    for (var k in pois) {
+	map.removeLayer(pois[k].marker);
+    };
 
     var b = map.getBounds();
 
@@ -137,12 +136,17 @@ function show_pois() {
 	     b.getEast() + "," + b.getNorth(), false);
     req.send(null);
 
-    $($.parseXML(req.responseText)).find("osm").find("node").each(function(){
+    pois = {}
+
+    $(jQuery.parseXML(req.responseText)).find("osm").find("node").each(function() {
 	var s = $("<div></div>");
-	show = false;
-	var lat = $(this).attr("lat");
-	var lon = $(this).attr("lon");
-	s.append("<label class='id'>" + $(this).attr("id") + "</label><br/>");
+	var p = {}
+	id = $(this).attr("id");
+	p.lat = $(this).attr("lat");
+	p.lon = $(this).attr("lon");
+	p.version = $(this).attr("version");
+
+	s.append("<label class='id'>" + id + "</label><br/>");
 	$(this).find("tag").each(function(){
 	    var k = $(this).attr("k");
 	    var v =  $(this).attr("v");
@@ -151,12 +155,12 @@ function show_pois() {
 	    }
 	    s.append(k + ": " + v + "<br/>");
 	});
-	
 	if (!show)
 	    return;
-	var m = L.marker([Number(lat), Number(lon)]);
-	markers.push(m);
-	m.bindPopup(s.html());
-	m.addTo(map);
+
+	p.marker = L.marker([Number(p.lat), Number(p.lon)]);
+	p.marker.bindPopup(s.html());
+	p.marker.addTo(map);
+	pois[id] = p;
     });
 }

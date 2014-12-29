@@ -97,7 +97,7 @@ function on_location_found (e) {
 	map.removeLayer(current_circle);
     current_circle = L.circle(e.latlng, radius);
     current_circle.addTo(map);
-    show_poi_kinds();
+    show_pois();
 }
 
 function on_location_error(e) {
@@ -117,17 +117,16 @@ function show_map() {
 <a href='http://creativecommons.org/licenses/by-sa/2.0/'>CC-BY-SA</a>"
     }).addTo(map);
     popup = L.popup();
-    nodes = new Array();
 }
 
 function set_current_pos() {
     map.locate({setView: true, maxZoom: 16, enableHighAccuracy: true});
 }
 
-function show_poi_kinds() {
+function show_pois() {
     markers.forEach(function(e) {
 	map.removeLayer(e);
-    })
+    });
 
     var b = map.getBounds();
 
@@ -159,6 +158,5 @@ function show_poi_kinds() {
 	markers.push(m);
 	m.bindPopup(s.html());
 	m.addTo(map);
-
     });
 }

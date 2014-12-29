@@ -95,7 +95,7 @@ function on_location_found (e) {
 	map.removeLayer(current_circle);
     current_circle = L.circle(e.latlng, radius);
     current_circle.addTo(map);
-    show_nodes();
+    show_pois();
 }
 
 function on_location_error(e) {
@@ -122,7 +122,7 @@ function set_current_pos() {
     map.locate({setView: true, maxZoom: 16, enableHighAccuracy: true});
 }
 
-function show_nodes() {
+function show_pois() {
     markers.forEach(function(e) {
 	map.removeLayer(e);
     })

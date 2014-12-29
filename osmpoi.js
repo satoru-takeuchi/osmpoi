@@ -10,50 +10,68 @@ var markers = new Array;
 var current_marker = null;
 var current_circle = null;
 
-var category_selector_text = "<select id='category_selector' name='category' onchange='on_change_category()'>" +
-    "<option value='leisure' selected>娯楽施設</option>" +
-    "<option value='amenity'>生活</option>" +
-    "</select>"
-
 var pois = { "leisure":
-	     "<select id='kind' name='kind'>" +
-	     "<option value='sports_centre'>スポーツセンター</option>" +
-	     "<option value='stadium'>スタジアム</option>" +
-	     "<option value='pitch'>運動場</option>" +
-	     "<option value='park'>公園</option>" +
-	     "<option value='garden'>庭園・植物園</option>" +
-	     "</select>"
-	     ,
+	     {
+		 "caption": "娯楽施設",
+		 "kind":
+		 [["sports_centre", "スポーツセンター"],
+		  ['stadium', "スタジアム"],
+		  ['pitch', "運動場"],
+		  ['park', "公園"],
+		  ['gaerden', "庭園・植物園"]]
+	     },
 	     "amenity" : 
-	     "<select id='kind' name='kind'>" +
-	     "<option value='restaurant'>レストラン</option>" +
-	     "<option value='pub'>居酒屋</option>" +
-	     "<option value='fast_food'>ファストフード店</option>" +
-	     "<option value='drinking_water'>飲料水</option>" +
-	     "<option value='cafe'>喫茶店</option>" +
-	     "<option value='school'>学校</option>" +
-	     "<option value='library'>図書館</option>" +
-	     "<option value='bank'>銀行</option>" +
-	     "<option value='parking'>駐車場</option>" +
-	     "<option value='hospital'>病院</option>" +
-	     "<option value='pharmacy'>薬局</option>" +
-	     "<option value='cinema'>映画館</option>" +
-	     "<option value='townhall'>市役所、町役場</option>" +
-	     "<option value='fire_station'>消防署</option>" +
-	     "<option value='police'>警察署</option>" +
-	     "<option value='post_office'>郵便局</option>" +
-	     "</select>"
+	     {
+		 "caption": "生活",
+		 "kind":
+		 [['restaurant', "レストラン"],
+		  ['pub', "居酒屋"],
+		  ['fast_food', "ファストフード店"],
+		  ['drinking_water', "飲料水"],
+		  ['cafe', "喫茶店"],
+		  ['school', "学校"],
+		  ['library', "図書館"],
+		  ['bank', "銀行"],
+		  ['parking', "駐車場"],
+		  ['hospital', "病院"],
+		  ['pharmacy', "薬局"],
+		  ['cinema', "映画館"],
+		  ['townhall', "市役所、町役場"],
+		  ['fire_station', "消防署"],
+		  ['police', "警察署"],
+		  ['post_office', "郵便局"]]
+	     }
 	   };
 
+function show_category_selector() {
+    s = "";
+    jQuery.each(
+	pois,
+	function (k,v) {
+	    s += "<option value='" + k + "'>" +
+		v.caption +
+		"</option>";
+	});
+    $("#category_selector").html(s);
+}
+
 function on_change_category() {
-    $("#kind_selector_pos").html(pois[$("#category_selector").val()] + "<br/>");
+    s = "";
+    jQuery.each(
+	pois[$("#category_selector").val()].kind,
+	function (k,v) {
+	    s += "<option value='" + v[0] + "' " + (k == 0 ? "selected" : "") + ">" +
+		v[1] +
+		"</option>"
+	});
+    $("#kind_selector_pos").html(s);
 }
 
 function on_map_click(e) {
     s = "<form action='submit.cgi' method='post'>" +
 	"名前: <input type='text' name='name' /><br/>" +
-	"分類: <div>" + category_selector_text + "</div>" +
-	"種類: " + "<div id='kind_selector_pos'></div>" +
+	"分類: <select id='category_selector' name='category' onchange='on_change_category()'></select><br/>" +
+	"種類: " + "<select id='kind_selector_pos' name='kind'></select><br/>" +
 	"<input type='hidden' name='lat' value='" + e.latlng.lat + "' />" +
 	"<input type='hidden' name='lng' value='" + e.latlng.lng + "' />" +
 	"<input type='submit' value='追加' />" +
@@ -62,6 +80,7 @@ function on_map_click(e) {
     popup.setLatLng(e.latlng)
 	.setContent(s)
 	.openOn(map);
+    show_category_selector();
     on_change_category();
 }
 

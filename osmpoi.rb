@@ -69,6 +69,16 @@ class Consumer
       return ret.is_a?(Net::HTTPSuccess) ? ret.body : nil
     end
 
+    def delete_node(id, version, lat, lon)
+      s = "<osm>" +
+        "<node id='#{id}' version='#{version}' changeset='#{@id}' lat='#{lat}' lon='#{lon}'/>" +
+        "</osm>"
+      ret = @consumer.access_token.put("/api/0.6/node/#{id}",
+                                       s,
+                                       {'Content-Type' => "text/plain",
+                                         'X-HTTP-Method-Override' => "DELETE"})
+      return ret.is_a?(Net::HTTPSuccess) ? ret.body : nil
+    end
     private
     def Changeset.fin(id)
       proc {

@@ -127,6 +127,7 @@ function show_pois() {
 	map.removeLayer(pois[k].marker);
     };
 
+
     var b = map.getBounds();
 
     var req = new XMLHttpRequest();
@@ -139,6 +140,7 @@ function show_pois() {
     pois = {}
 
     $(jQuery.parseXML(req.responseText)).find("osm").find("node").each(function() {
+	var show = false;
 	var s = $("<div></div>");
 	var p = {}
 	id = $(this).attr("id");
@@ -155,12 +157,39 @@ function show_pois() {
 	    }
 	    s.append(k + ": " + v + "<br/>");
 	});
+
 	if (!show)
 	    return;
+
+	del = $("<input type='button' value='削除' onclick='delete_poi(" +
+		id +
+		")'></input>");
+	s.append(del);
 
 	p.marker = L.marker([Number(p.lat), Number(p.lon)]);
 	p.marker.bindPopup(s.html());
 	p.marker.addTo(map);
 	pois[id] = p;
+    });
+}
+
+function delete_poi(id)
+{
+    p = pois[id]
+    jQuery.ajax({
+	url: "delete.cgi",
+	data: "id=" + id + "&" +
+	    "version=" + p.version + "&" +
+	    "lat=" + p.lat + "&" +
+	    "lon=" + p.lon,
+	async: false,
+	success: function () {
+	    alert("ポインタを削除しました");
+	    map.removeLayer(pois[id].marker);
+	    delete pois[id]
+	},
+	error: function () {
+	    alert("ポイントの削除に失敗しました");
+	},
     });
 }

@@ -18,14 +18,14 @@ name = CGI.escapeHTML(cgi['name'])
 category = cgi['category']
 kind = cgi['kind']
 lat = cgi['lat']
-lng = cgi['lng']
+lon = cgi['lon']
 
 c = Consumer.new
 c.set_access_token(session['access_token'], session['access_token_secret'])
 cs = c.create_changeset
 
 status = "failed"
-if cs.create_node(lat, lng,
+if cs.create_node(lat, lon,
                   {"name" => name,
                     category => kind})
   status = "succeeded"

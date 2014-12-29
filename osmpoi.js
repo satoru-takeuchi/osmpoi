@@ -74,7 +74,7 @@ function on_map_click(e) {
 	"分類: <select id='category_selector' name='category' onchange='on_change_category()'></select><br/>" +
 	"種類: " + "<select id='kind_selector_pos' name='kind'></select><br/>" +
 	"<input type='hidden' name='lat' value='" + e.latlng.lat + "' />" +
-	"<input type='hidden' name='lng' value='" + e.latlng.lng + "' />" +
+	"<input type='hidden' name='lon' value='" + e.latlng.lng + "' />" +
 	"<input type='submit' value='追加' />" +
 	"</form>";
 

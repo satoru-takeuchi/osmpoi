@@ -10,7 +10,7 @@ var markers = new Array;
 var current_marker = null;
 var current_circle = null;
 
-var pois = { "leisure":
+var poi_kinds = { "leisure":
 	     {
 		 "caption": "娯楽施設",
 		 "kind":
@@ -43,10 +43,12 @@ var pois = { "leisure":
 	     }
 	   };
 
+var pois;
+
 function show_category_selector() {
     s = "";
     jQuery.each(
-	pois,
+	poi_kinds,
 	function (k,v) {
 	    s += "<option value='" + k + "'>" +
 		v.caption +
@@ -58,7 +60,7 @@ function show_category_selector() {
 function on_change_category() {
     s = "";
     jQuery.each(
-	pois[$("#category_selector").val()].kind,
+	poi_kinds[$("#category_selector").val()].kind,
 	function (k,v) {
 	    s += "<option value='" + v[0] + "' " + (k == 0 ? "selected" : "") + ">" +
 		v[1] +
@@ -95,7 +97,7 @@ function on_location_found (e) {
 	map.removeLayer(current_circle);
     current_circle = L.circle(e.latlng, radius);
     current_circle.addTo(map);
-    show_pois();
+    show_poi_kinds();
 }
 
 function on_location_error(e) {
@@ -122,7 +124,7 @@ function set_current_pos() {
     map.locate({setView: true, maxZoom: 16, enableHighAccuracy: true});
 }
 
-function show_pois() {
+function show_poi_kinds() {
     markers.forEach(function(e) {
 	map.removeLayer(e);
     })
@@ -137,23 +139,26 @@ function show_pois() {
     req.send(null);
 
     $($.parseXML(req.responseText)).find("osm").find("node").each(function(){
-	var s = "";
+	var s = $("<div></div>");
 	show = false;
 	var lat = $(this).attr("lat");
 	var lon = $(this).attr("lon");
+	s.append("<label class='id'>" + $(this).attr("id") + "</label><br/>");
 	$(this).find("tag").each(function(){
 	    var k = $(this).attr("k");
 	    var v =  $(this).attr("v");
 	    if (k == "name" && v.length > 0) {
 		show = true;
 	    }
-	    s += k + ": " + v + "<br/>";
+	    s.append(k + ": " + v + "<br/>");
 	});
+	
 	if (!show)
 	    return;
 	var m = L.marker([Number(lat), Number(lon)]);
 	markers.push(m);
-	m.bindPopup(s);
+	m.bindPopup(s.html());
 	m.addTo(map);
+
     });
 }

@@ -13,20 +13,23 @@ var current_circle = null;
 var category_selector_text = "<select id='category_selector' name='category' onchange='on_change_category()'>" +
     "<option value='leisure' selected>娯楽施設</option>" +
     "<option value='amenity'>生活</option>" +
-    "</select></br>"
+    "</select>"
 
 var pois = { "leisure":
 	     "<select id='kind' name='kind'>" +
+	     "<option value='sports_centre'>スポーツセンター</option>" +
 	     "<option value='stadium'>スタジアム</option>" +
 	     "<option value='pitch'>運動場</option>" +
 	     "<option value='park'>公園</option>" +
 	     "<option value='garden'>庭園・植物園</option>" +
-	     "</select><br/>"
+	     "</select>"
 	     ,
 	     "amenity" : 
 	     "<select id='kind' name='kind'>" +
 	     "<option value='restaurant'>レストラン</option>" +
+	     "<option value='pub'>居酒屋</option>" +
 	     "<option value='fast_food'>ファストフード店</option>" +
+	     "<option value='drinking_water'>飲料水</option>" +
 	     "<option value='cafe'>喫茶店</option>" +
 	     "<option value='school'>学校</option>" +
 	     "<option value='library'>図書館</option>" +
@@ -39,7 +42,7 @@ var pois = { "leisure":
 	     "<option value='fire_station'>消防署</option>" +
 	     "<option value='police'>警察署</option>" +
 	     "<option value='post_office'>郵便局</option>" +
-	     "</select><br/>"
+	     "</select>"
 	   };
 
 function on_change_category() {
@@ -49,7 +52,7 @@ function on_change_category() {
 function on_map_click(e) {
     s = "<form action='submit.cgi' method='post'>" +
 	"名前: <input type='text' name='name' /><br/>" +
-	"分類: " + category_selector_text +
+	"分類: <div>" + category_selector_text + "</div>" +
 	"種類: " + "<div id='kind_selector_pos'></div>" +
 	"<input type='hidden' name='lat' value='" + e.latlng.lat + "' />" +
 	"<input type='hidden' name='lng' value='" + e.latlng.lng + "' />" +

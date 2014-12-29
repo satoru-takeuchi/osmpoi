@@ -15,6 +15,7 @@ if !(session = osmpoi_get_session(cgi))
 end
 
 name = CGI.escapeHTML(cgi['name'])
+category = cgi['category']
 kind = cgi['kind']
 lat = cgi['lat']
 lng = cgi['lng']
@@ -26,7 +27,7 @@ cs = c.create_changeset
 status = "failed"
 if cs.create_node(lat, lng,
                   {"name" => name,
-                    "amenity" => kind})
+                    category => kind})
   status = "succeeded"
 end
  

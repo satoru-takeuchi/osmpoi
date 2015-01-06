@@ -75,6 +75,34 @@ var poi_kinds = { "leisure":
 		  ["toilets", "公衆トイレ"],
 		  ["vending_machine", "自動販売機"],
 		  ["waste_disposal", "ごみ捨て場"]]
+	     },
+	     "shop" : 
+	     {
+		 "caption": "店舗",
+		 "kind":
+		 [["alcohol", "酒屋"],
+		  ["bakery", "パン屋"],
+		  ["beverages", "飲料店"],
+		  ["bicycle", "自転車店"],
+		  ["books", "本屋"],
+		  ["butcher", "精肉店"],
+		  ["car", "自動車販売店"],
+		  ["chemist", "化粧品、衛生掃除薬品"],
+		  ["clothes", "服屋"],
+		  ["convenience", "コンビニエンスストア"],
+		  ["department_store", "デパート"],
+		  ["dry_cleaning", "クリーニング店"],
+		  ["doityourself", "ＤＩＹショップ"],
+		  ["electronics", "家電店"],
+		  ["florist", "花屋"],
+		  ["garden_centre", "園芸用品店"],
+		  ["greengrocer", "八百屋"],
+		  ["hardware", "金物屋"],
+		  ["kiosk", "キオスク"],
+		  ["laundry", "洗濯ランドリー"],
+		  ["outdoor", "アウトドア用品店"],
+		  ["stationery", "文房具店"],
+		  ["supermarket", "スーパーマーケット"]]
 	     }
 	   };
 

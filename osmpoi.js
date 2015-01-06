@@ -27,7 +27,7 @@ var poi_kinds = { "leisure":
 		  ["ice_rink", "アイスリンク"],
 		  ["miniature_golf", "ミニチュア（パット）ゴルフ"]]
 	     },
-	     "amenity" : 
+	     "amenity" :
 	     {
 		 "caption": "生活",
 		 "kind":
@@ -76,7 +76,7 @@ var poi_kinds = { "leisure":
 		  ["vending_machine", "自動販売機"],
 		  ["waste_disposal", "ごみ捨て場"]]
 	     },
-	     "shop" : 
+	     "shop" :
 	     {
 		 "caption": "店舗",
 		 "kind":
@@ -104,8 +104,8 @@ var poi_kinds = { "leisure":
 		  ["stationery", "文房具店"],
 		  ["supermarket", "スーパーマーケット"]]
 	     },
-	     "tourism" : 
-	     {
+	     "tourism" :
+             {
 		 "caption": "観光",
 		 "kind":
 		 [["hotel", "ホテル"],
@@ -117,8 +117,18 @@ var poi_kinds = { "leisure":
 		  ["museum", "博物館、美術館など"],
 		  ["viewpoint", "展望台"],
 		  ["zoo", "動物園"]]
+	     },
+		  "historic" :
+		  {
+		 "caption": "歴史的建造物",
+		 "kind":
+		 [["castle", "城"],
+		  ["monument", "記念碑（大）"],
+		  ["memorial", "記念碑（小）"],
+		  ["archaeological_site", "遺跡（群）"],
+		  ["battlefield", "戦場跡"]]
 	     }
-	   };
+	};
 
 var pois = {};
 

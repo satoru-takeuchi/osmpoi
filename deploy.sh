@@ -13,4 +13,4 @@ if [ ! -d "$TARGET" ] ; then
 fi
 
 mkdir -p $TARGET
-cp -a osmpoi.rb *.erb *.css *.js *.cgi $TARGET
+cp -a osmpoi.rb oauth_enhance.rb *.erb *.css *.js *.cgi $TARGET

@@ -6,6 +6,7 @@ require "cgi"
 require "cgi/session"
 require "erb"
 
+load "oauth_enhance.rb"
 load 'config.rb'
 
 LOGIN_URL = BASE_URL + "login.cgi"
@@ -73,10 +74,9 @@ class Consumer
       s = "<osm>" +
         "<node id='#{id}' version='#{version}' changeset='#{@id}' lat='#{lat}' lon='#{lon}'/>" +
         "</osm>"
-      ret = @consumer.access_token.put("/api/0.6/node/#{id}",
-                                       s,
-                                       {'Content-Type' => "text/plain",
-                                         'X-HTTP-Method-Override' => "DELETE"})
+      ret = @consumer.access_token.delete("/api/0.6/node/#{id}",
+                                          s,
+                                          {'Content-Type' => "text/xml"})
       return ret.is_a?(Net::HTTPSuccess) ? ret.body : nil
     end
     private

@@ -10,125 +10,138 @@ var current_marker = null;
 var current_circle = null;
 
 var poi_kinds = { "leisure":
-	     {
-		 "caption": "娯楽施設",
-		 "kind":
-		 [["sports_centre", "スポーツセンター"],
-		  ["golf_course", "ゴルフコース"],
-		  ["stadium", "スタジアム"],
-		  ["track", "競技トラック"],
-		  ["pitch", "運動場"],
-		  ["water_park", "親水公園"],
-		  ["marina", "マリーナ"],
-		  ["fishing", "釣り"],
-		  ["park", "公園"],
-		  ["playground", "遊び場"],
-		  ["garden", "庭園・植物園"],
-		  ["ice_rink", "アイスリンク"],
-		  ["miniature_golf", "ミニチュア（パット）ゴルフ"]]
-	     },
-	     "amenity" :
-	     {
-		 "caption": "生活",
-		 "kind":
-		 [["restaurant", "レストラン"],
-		  ["pub", "居酒屋"],
-		  ["fast_food", "ファーストフード店"],
-		  ["drinking_water", "飲料水"],
-		  ["biergarten", "ビアガーデン"],
-		  ["cafe", "喫茶店"],
-		  ["school", "学校"],
-		  ["college", "短大、専修・専門学校"],
-		  ["library", "図書館"],
-		  ["university", "大学"],
-		  ["ferry_terminal", "フェリーターミナル"],
-		  ["bicycle_parking", "駐輪場"],
-		  ["bicycle_rental", "レンタルサイクル店"],
-		  ["car_rental", "レンタカー店"],
-		  ["bus_station", "バスターミナル"],
-		  ["fuel", "ガソリンスタンド"],
-		  ["parking", "駐車場"],
-		  ["taxi", "タクシー乗り場"],
-		  ["atm", "ATM"],
-		  ["bank", "銀行"],
-		  ["pharmacy", "薬局"],
-		  ["hospital", "病院、診療所"],
-		  ["veterinary", "動物病院"],
-		  ["cinema", "映画館"],
-		  ["fountain", "噴水"],
-		  ["nightclub", "クラブ"],
-		  ["studio", "TV、ラジオスタジオ"],
-		  ["theatre", "劇場"],
-		  ["courthouse", "裁判所"],
-		  ["townhall", "市役所、町役場"],
-		  ["fire_station", "消防署"],
-		  ["police", "警察署"],
-		  ["public_building", "公共施設、官公署"],
-		  ["post_office", "郵便局"],
-		  ["post_box", "ポスト"],
-		  ["place_of_worship", "礼拝所"],
-		  ["prison", "刑務所"],
-		  ["crematorium", "火葬場"],
-		  ["grave_yard", "墓所"],
-		  ["bench", "ベンチ"],
-		  ["telephone", "公衆電話"],
-		  ["toilets", "公衆トイレ"],
-		  ["vending_machine", "自動販売機"],
-		  ["waste_disposal", "ごみ捨て場"]]
-	     },
-	     "shop" :
-	     {
-		 "caption": "店舗",
-		 "kind":
-		 [["alcohol", "酒屋"],
-		  ["bakery", "パン屋"],
-		  ["beverages", "飲料店"],
-		  ["bicycle", "自転車店"],
-		  ["books", "本屋"],
-		  ["butcher", "精肉店"],
-		  ["car", "自動車販売店"],
-		  ["chemist", "化粧品、衛生掃除薬品"],
-		  ["clothes", "服屋"],
-		  ["convenience", "コンビニエンスストア"],
-		  ["department_store", "デパート"],
-		  ["dry_cleaning", "クリーニング店"],
-		  ["doityourself", "ＤＩＹショップ"],
-		  ["electronics", "家電店"],
-		  ["florist", "花屋"],
-		  ["garden_centre", "園芸用品店"],
-		  ["greengrocer", "八百屋"],
-		  ["hardware", "金物屋"],
-		  ["kiosk", "キオスク"],
-		  ["laundry", "洗濯ランドリー"],
-		  ["outdoor", "アウトドア用品店"],
-		  ["stationery", "文房具店"],
-		  ["supermarket", "スーパーマーケット"]]
-	     },
-	     "tourism" :
-             {
-		 "caption": "観光",
-		 "kind":
-		 [["hotel", "ホテル"],
-		  ["hostel", "ユースホステル"],
-		  ["chalet", "バンガロー"],
-		  ["camp_site", "キャンプ場"],
-		  ["caravan site", "オートキャンプ場"],
-		  ["information", "旅行案内所"],
-		  ["museum", "博物館、美術館など"],
-		  ["viewpoint", "展望台"],
-		  ["zoo", "動物園"]]
-	     },
+		  {
+		      "caption": "娯楽施設",
+		      "kind":
+		      [["sports_centre", "スポーツセンター"],
+		       ["golf_course", "ゴルフコース"],
+		       ["stadium", "スタジアム"],
+		       ["track", "競技トラック"],
+		       ["pitch", "運動場"],
+		       ["water_park", "親水公園"],
+		       ["marina", "マリーナ"],
+		       ["fishing", "釣り"],
+		       ["park", "公園"],
+		       ["playground", "遊び場"],
+		       ["garden", "庭園・植物園"],
+		       ["ice_rink", "アイスリンク"],
+		       ["miniature_golf", "ミニチュア（パット）ゴルフ"]]
+		  },
+		  "amenity" :
+		  {
+		      "caption": "生活",
+		      "kind":
+		      [["restaurant", "レストラン"],
+		       ["pub", "居酒屋"],
+		       ["fast_food", "ファーストフード店"],
+		       ["drinking_water", "飲料水"],
+		       ["biergarten", "ビアガーデン"],
+		       ["cafe", "喫茶店"],
+		       ["school", "学校"],
+		       ["college", "短大、専修・専門学校"],
+		       ["library", "図書館"],
+		       ["university", "大学"],
+		       ["ferry_terminal", "フェリーターミナル"],
+		       ["bicycle_parking", "駐輪場"],
+		       ["bicycle_rental", "レンタルサイクル店"],
+		       ["car_rental", "レンタカー店"],
+		       ["bus_station", "バスターミナル"],
+		       ["fuel", "ガソリンスタンド"],
+		       ["parking", "駐車場"],
+		       ["taxi", "タクシー乗り場"],
+		       ["atm", "ATM"],
+		       ["bank", "銀行"],
+		       ["pharmacy", "薬局"],
+		       ["hospital", "病院、診療所"],
+		       ["veterinary", "動物病院"],
+		       ["cinema", "映画館"],
+		       ["fountain", "噴水"],
+		       ["nightclub", "クラブ"],
+		       ["studio", "TV、ラジオスタジオ"],
+		       ["theatre", "劇場"],
+		       ["courthouse", "裁判所"],
+		       ["townhall", "市役所、町役場"],
+		       ["fire_station", "消防署"],
+		       ["police", "警察署"],
+		       ["public_building", "公共施設、官公署"],
+		       ["post_office", "郵便局"],
+		       ["post_box", "ポスト"],
+		       ["place_of_worship", "礼拝所"],
+		       ["prison", "刑務所"],
+		       ["crematorium", "火葬場"],
+		       ["grave_yard", "墓所"],
+		       ["bench", "ベンチ"],
+		       ["telephone", "公衆電話"],
+		       ["toilets", "公衆トイレ"],
+		       ["vending_machine", "自動販売機"],
+		       ["waste_disposal", "ごみ捨て場"]]
+		  },
+		  "shop" :
+		  {
+		      "caption": "店舗",
+		      "kind":
+		      [["alcohol", "酒屋"],
+		       ["bakery", "パン屋"],
+		       ["beverages", "飲料店"],
+		       ["bicycle", "自転車店"],
+		       ["books", "本屋"],
+		       ["butcher", "精肉店"],
+		       ["car", "自動車販売店"],
+		       ["chemist", "化粧品、衛生掃除薬品"],
+		       ["clothes", "服屋"],
+		       ["convenience", "コンビニエンスストア"],
+		       ["department_store", "デパート"],
+		       ["dry_cleaning", "クリーニング店"],
+		       ["doityourself", "ＤＩＹショップ"],
+		       ["electronics", "家電店"],
+		       ["florist", "花屋"],
+		       ["garden_centre", "園芸用品店"],
+		       ["greengrocer", "八百屋"],
+		       ["hardware", "金物屋"],
+		       ["kiosk", "キオスク"],
+		       ["laundry", "洗濯ランドリー"],
+		       ["outdoor", "アウトドア用品店"],
+		       ["stationery", "文房具店"],
+		       ["supermarket", "スーパーマーケット"]]
+		  },
+		  "tourism" :
+		  {
+		      "caption": "観光",
+		      "kind":
+		      [["hotel", "ホテル"],
+		       ["hostel", "ユースホステル"],
+		       ["chalet", "バンガロー"],
+		       ["camp_site", "キャンプ場"],
+		       ["caravan site", "オートキャンプ場"],
+		       ["information", "旅行案内所"],
+		       ["museum", "博物館、美術館など"],
+		       ["viewpoint", "展望台"],
+		       ["zoo", "動物園"]]
+		  },
 		  "historic" :
 		  {
-		 "caption": "歴史的建造物",
-		 "kind":
-		 [["castle", "城"],
-		  ["monument", "記念碑（大）"],
-		  ["memorial", "記念碑（小）"],
-		  ["archaeological_site", "遺跡（群）"],
-		  ["battlefield", "戦場跡"]]
-	     }
-	};
+		      "caption": "歴史的建造物",
+		      "kind":
+		      [["castle", "城"],
+		       ["monument", "記念碑（大）"],
+		       ["memorial", "記念碑（小）"],
+		       ["archaeological_site", "遺跡（群）"],
+		       ["battlefield", "戦場跡"]]
+		  },
+		  "landuse" :
+		  {
+		      "caption": "土地利用",
+		      "kind":
+		      [["reservoir", "ため池"],
+		       ["vineyard", "ぶどう畑"],
+		       ["forest", "森"],
+		       ["cemetery", "共同墓地"],
+		       ["residential", "住宅街、居住区域"],
+		       ["retail", "商店街"],
+		       ["commercial", "ビジネス、事務所街"],
+		       ["industrial", "工場、倉庫街"]]
+		  }
+		};
 
 var pois = {};
 

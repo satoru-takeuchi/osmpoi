@@ -14,10 +14,18 @@ var poi_kinds = { "leisure":
 		 "caption": "娯楽施設",
 		 "kind":
 		 [["sports_centre", "スポーツセンター"],
-		  ['stadium', "スタジアム"],
-		  ['pitch', "運動場"],
-		  ['park', "公園"],
-		  ['gaerden', "庭園・植物園"]]
+		  ["golf_course", "ゴルフコース"],
+		  ["stadium", "スタジアム"],
+		  ["track", "競技トラック"],
+		  ["pitch", "運動場"],
+		  ["water_park", "親水公園"],
+		  ["marina", "マリーナ"],
+		  ["fishing", "釣り"],
+		  ["park", "公園"],
+		  ["playground", "遊び場"],
+		  ["garden", "庭園・植物園"],
+		  ["ice_rink", "アイスリンク"],
+		  ["miniature_golf", "ミニチュア（パット）ゴルフ"]]
 	     },
 	     "amenity" : 
 	     {

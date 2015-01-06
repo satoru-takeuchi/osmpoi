@@ -103,6 +103,20 @@ var poi_kinds = { "leisure":
 		  ["outdoor", "アウトドア用品店"],
 		  ["stationery", "文房具店"],
 		  ["supermarket", "スーパーマーケット"]]
+	     },
+	     "tourism" : 
+	     {
+		 "caption": "観光",
+		 "kind":
+		 [["hotel", "ホテル"],
+		  ["hostel", "ユースホステル"],
+		  ["chalet", "バンガロー"],
+		  ["camp_site", "キャンプ場"],
+		  ["caravan site", "オートキャンプ場"],
+		  ["information", "旅行案内所"],
+		  ["museum", "博物館、美術館など"],
+		  ["viewpoint", "展望台"],
+		  ["zoo", "動物園"]]
 	     }
 	   };
 
